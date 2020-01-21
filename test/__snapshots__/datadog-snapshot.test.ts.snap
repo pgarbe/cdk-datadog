@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Resource created 1`] = `
+Object {
+  "Resources": Object {
+    "MyTestConstructDataDogMonitorF678180F": Object {
+      "Properties": Object {
+        "DatadogCredentials": Object {
+          "ApiKey": "foo",
+          "ApiURL": "https://datadoghq.eu",
+          "ApplicationKey": "foo",
+        },
+        "Name": "name",
+        "Query": "query",
+        "Type": "event alert",
+      },
+      "Type": "Datadog::Monitors::Monitor",
+    },
+  },
+}
+`;
