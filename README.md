@@ -2,7 +2,9 @@
 
 An CDK library to easily integrate your applications with DataDog.
 
-> Disclaimer: It's not an offical DataDog Construct Library. In lack of an official one from DataDog, this library tries to fill the gap. 
+![](https://github.com/pgarbe/cdk-datadog/workflows/Build/badge.svg)
+
+> Disclaimer: This is not an offical DataDog Construct Library. 
 
 Currently supported:
 * DataDog Agent as ECS Sidecar
