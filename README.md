@@ -17,9 +17,12 @@ Currently supported:
   let existingTaskDefinition = ... // Taskdefinition with app container
   let datadogApiKey = // Secret from ParameterStore or SecretsManager
 
-  new DatadogSidecar(stack, 'DatadogSidecar', existingTaskDefinition, { 
-    datadogApiKey: datadogApiKey,
-  });
+  DatadogSidecar.addToTaskDefinition(
+    taskDefinition, 
+    {
+      datadogApiKey: secret
+    }
+  );
 
 ```
 
