@@ -1,6 +1,6 @@
 {
   "name": "cdk-datadog",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -10,14 +10,16 @@
     "build": "jsii",
     "watch": "jsii -w",
     "integ": "cdk-integ",
-    "build+test": "npm-run-all clean build test",
-    "package": "npm-run-all clean build build-python && jsii-pacmak",
+    "package": "jsii-pacmak",
     "cdk": "cdk",
     "upload": "npm publish pack/js/* && python3 -m twine upload pack/python/*"
   },
   "author": {
     "name": "Philipp Garbe"
   },
+  "awscdkio": {
+    "twitter": "pgarbe"
+  },  
   "repository": {
     "type": "git",
     "url": "https://github.com/pgarbe/cdk-datadog"

@@ -2,9 +2,12 @@
 
 An CDK library to easily integrate your applications with DataDog.
 
-Supports
+> Disclaimer: It's not an offical DataDog Construct Library. In lack of an official one from DataDog, this library tries to fill the gap. 
+
+Currently supported:
 * DataDog Agent as ECS Sidecar
 * DataDog Monitors as native CDK Constructs
+
 
 ## How to use it
 
@@ -30,5 +33,6 @@ Supports
 - [ ] feat: datadog dashboards
 - [ ] feat: datadog log forwarder (aspect?)
 - [ ] feat: create monitors for all relevant resources (like cdk-watchful)
+- [ ] feat: support additional languages (python, dotnet, ...)
 
 https://github.com/aws/aws-cdk/blob/master/packages/@aws-cdk/custom-resources/README.md

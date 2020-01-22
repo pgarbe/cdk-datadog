@@ -43,6 +43,13 @@ export interface DataDogIntegrationProps {
 
 export class DatadogSidecar extends cdk.Construct implements cdk.ITaggable {
 
+  /**
+   * Creates a DataDog sidecar to an existing task definition.
+   */
+  public static addToTaskDefinition(taskDefinition: TaskDefinition, props: DataDogIntegrationProps): cdk.Construct {
+    return new DatadogSidecar(taskDefinition.stack, "DataDogSideCar", taskDefinition, props);
+  }
+
   tags: cdk.TagManager;
   private taskDefinition: ecs.TaskDefinition;
   private props: DataDogIntegrationProps

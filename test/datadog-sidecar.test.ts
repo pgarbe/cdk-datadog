@@ -17,13 +17,12 @@ test('Sidecar sets all necessary properties', () => {
   })
 
   // WHEN
-  // taskDefinition.withDataDogSidecar({ 
-  //   datadogApiKey: secret,
-  // });
-
-  new CdkDatadog.DatadogSidecar(stack, 'MyTestConstruct', taskDefinition, { 
-    datadogApiKey: secret,
-  });
+  CdkDatadog.DatadogSidecar.addToTaskDefinition(
+    taskDefinition, 
+    {
+      datadogApiKey: secret
+    }
+  );
 
   // THEN
   const sidecarContainerDefinition = SynthUtils.synthesize(stack).template.Resources.TaskDefinitionB36D86D9;

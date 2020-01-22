@@ -982,7 +982,7 @@
   "license": "Apache-2.0",
   "name": "cdk-datadog",
   "readme": {
-    "markdown": "# CDK-DataDog\n\nAn CDK library to easily integrate your applications with DataDog.\n\nSupports\n* DataDog Agent as ECS Sidecar\n* DataDog Monitors as native CDK Constructs\n\n## How to use it\n\n#### DataDog Agent as SideCar\n\n```typescript\n  let existingTaskDefinition = ... // Taskdefinition with app container\n  let datadogApiKey = // Secret from ParameterStore or SecretsManager\n\n  new DatadogSidecar(stack, 'DatadogSidecar', existingTaskDefinition, {\n    datadogApiKey: datadogApiKey,\n  });\n\n```\n## Decisions\n\n### Use Python for lambdas\nUnfortunately, DataDog does not offer an SDK for node and 3rd party ones are heavily outdated and not under development anymore. An official DataDog SDK exists for Python, so it makes sense to write the Lambdas in Python, although it's not consistent with TypeScript that is used for the CDK Constructs.\n\n## Open Issues\n- [] Deployment pipeline (GitHub actions?)\n- [] feat: enable CloudFormation 3rd party resources\n- [] feat: account integration (+ role)\n- [] Real integration test or at least simple example\n- [] feat: datadog monitors\n- [] feat: datadog synthetic tests\n- [] feat: datadog dashboards\n- [] feat: datadog log forwarder (aspect?)\n- [] feat: create monitors for all relevant resources (like cdk-watchful)\n\nhttps://github.com/aws/aws-cdk/blob/master/packages/@aws-cdk/custom-resources/README.md"
+    "markdown": "# CDK-DataDog\n\nAn CDK library to easily integrate your applications with DataDog.\n\n> Disclaimer: It's not an offical DataDog Construct Library. In lack of an official one from DataDog, this library tries to fill the gap.\n\nCurrently supported:\n* DataDog Agent as ECS Sidecar\n* DataDog Monitors as native CDK Constructs\n\n\n## How to use it\n\n#### DataDog Agent as SideCar\n\n```typescript\n  let existingTaskDefinition = ... // Taskdefinition with app container\n  let datadogApiKey = // Secret from ParameterStore or SecretsManager\n\n  new DatadogSidecar(stack, 'DatadogSidecar', existingTaskDefinition, {\n    datadogApiKey: datadogApiKey,\n  });\n\n```\n\n## Open Issues\n- [ ] Deployment pipeline (GitHub actions?)\n- [ ] feat: enable CloudFormation 3rd party resources\n- [ ] feat: account integration (+ role)\n- [ ] Real integration test or at least simple example\n- [ ] feat: datadog monitors\n- [ ] feat: datadog synthetic tests\n- [ ] feat: datadog dashboards\n- [ ] feat: datadog log forwarder (aspect?)\n- [ ] feat: create monitors for all relevant resources (like cdk-watchful)\n- [ ] feat: support additional languages (python, dotnet, ...)\n\nhttps://github.com/aws/aws-cdk/blob/master/packages/@aws-cdk/custom-resources/README.md\n"
   },
   "repository": {
     "type": "git",
@@ -999,6 +999,6 @@
     }
   },
   "types": {},
-  "version": "0.1.0",
-  "fingerprint": "1JkoJwahQzzaa0fSS5sVCxES0oyRg+v+sRF0lqyECcQ="
+  "version": "0.0.1",
+  "fingerprint": "LwXhKusAVF5oPacwglDlMG9rAcXFBYgBo0KQt3SVT2Q="
 }
