@@ -2,24 +2,18 @@
 name: Build
 
 on:
+  pull_request:
   push:
     branches:
       - master
+      - 'releases/*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-
-      - name: Publish packages
-        uses: udondan/jsii-publish@v0.8.2
-        with:
-          VERSION: 'latest'
-          BUILD_SOURCE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+    - uses: actions/checkout@v1
+    - run: |
+        npm install
+        npm run build
+        npm run test
