@@ -1,5 +1,5 @@
 ---
-name: Publish CDK packages
+name: Build
 
 on:
   push:
@@ -11,10 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
-
       - name: Checkout code
         uses: actions/checkout@v1
         with:
@@ -23,7 +19,7 @@ jobs:
       - name: Publish packages
         uses: udondan/jsii-publish@v0.8.2
         with:
-          VERSION: ${{ steps.get_version.outputs.VERSION }}
+          VERSION: 'latest'
           BUILD_SOURCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}

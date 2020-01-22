@@ -1,5 +1,5 @@
 ---
-name: Publish CDK packages
+name: Release
 
 on:
   push:
