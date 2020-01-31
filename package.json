@@ -48,7 +48,7 @@
     "@types/jest": "24.9.1",
     "@types/node": "13.5.3",
     "@types/nodeunit": "0.0.30",
-    "jest": "24.9.0",
+    "jest": "25.1.0",
     "jsii": "0.21.2",
     "jsii-pacmak": "0.21.2",
     "nodeunit": "0.11.3",
