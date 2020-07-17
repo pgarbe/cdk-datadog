@@ -57,7 +57,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "25.2.1",
     "typedoc": "0.17.1",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   },
   "peerDependencies": {
     "@aws-cdk/core": "^1.21.1",
