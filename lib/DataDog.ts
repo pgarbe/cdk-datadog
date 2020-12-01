@@ -1,6 +1,6 @@
 export enum DataDogSite {
-  eu = "datadoghq.eu",
-  us = "datadoghq.com"
+  EU = "datadoghq.eu",
+  US = "datadoghq.com"
 }
 
 export interface DataDogCredentials {

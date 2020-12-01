@@ -2,21 +2,21 @@ import * as cdk from '@aws-cdk/core';
 import { DataDogCredentials } from './DataDog';
 
 export enum MonitorType {
-  anomaly = "query alert",
-  apm = "query alert",
-  composite = "composite",
-  custom = "service check",
-  event = "event alert",
-  forecast = "query alert",
-  host = "service check",
-  integration = "query alert", // or service check
-  live = "process	process alert",
-  logs = "log alert",
-  metric = "metric alert",
-  network = "service check",
-  outlier = "query alert",
-  process = "service check",
-  watchdog = "event alert",
+  ANOMALY = "query alert",
+  APM = "query alert",
+  COMPOSITE = "composite",
+  CUSTOM = "service check",
+  EVENT = "event alert",
+  FORECAST = "query alert",
+  HOST = "service check",
+  INTEGRATION = "query alert", // or service check
+  LIVE = "process	process alert",
+  LOGS = "log alert",
+  METRIC = "metric alert",
+  NETWORK = "service check",
+  OUTLIER = "query alert",
+  PROCESS = "service check",
+  WATCHDOG = "event alert",
 }
 
 export interface DataDogMonitorProps {

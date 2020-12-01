@@ -9,7 +9,7 @@ const stack = new cdk.Stack(app, 'cdk-datadog-');
 
 new DataDogIntegration(stack, 'Integration', {
   creds: {
-    datadogSite: DataDogSite.eu,
+    datadogSite: DataDogSite.EU,
     datadogApiKey: 'secret'
   },
   roleName: 'datadog-role'

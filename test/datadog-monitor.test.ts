@@ -12,14 +12,14 @@ test('Sidecar sets all necessary properties', () => {
   const dataDogCreds: DataDogCredentials = {
     datadogApiKey: '',
     datadogAppKey: '',
-    datadogSite: DataDogSite.eu
+    datadogSite: DataDogSite.EU
   }
 
   new DataDogMonitor(stack, 'MyTestConstruct', { 
     creds: dataDogCreds,
     query: '',
     name: '',
-    type: MonitorType.metric,
+    type: MonitorType.METRIC,
     message: ''
   });
 

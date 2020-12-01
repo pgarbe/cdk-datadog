@@ -1,7 +1,6 @@
 import * as cdk from '@aws-cdk/core';
 import { DataDogSite } from './DataDog';
 import * as ecs from '@aws-cdk/aws-ecs';
-import { TaskDefinition } from '@aws-cdk/aws-ecs';
 
 // declare module '@aws-cdk/aws-ecs' {
   // interface TaskDefinition {
@@ -14,7 +13,7 @@ import { TaskDefinition } from '@aws-cdk/aws-ecs';
 // }
 
 
-export interface DataDogIntegrationProps {
+export interface DatadogSidecarProps {
   /**
    * The secret that stores the Datadog API key.
    */
@@ -46,15 +45,15 @@ export class DatadogSidecar extends cdk.Construct implements cdk.ITaggable {
   /**
    * Creates a DataDog sidecar to an existing task definition.
    */
-  public static addToTaskDefinition(taskDefinition: TaskDefinition, props: DataDogIntegrationProps): cdk.Construct {
+  public static addToTaskDefinition(taskDefinition: ecs.TaskDefinition, props: DatadogSidecarProps): cdk.Construct {
     return new DatadogSidecar(taskDefinition.stack, "DataDogSideCar", taskDefinition, props);
   }
 
-  tags: cdk.TagManager;
+  public tags: cdk.TagManager;
   private taskDefinition: ecs.TaskDefinition;
-  private props: DataDogIntegrationProps
+  private props: DatadogSidecarProps
 
-  constructor(scope: cdk.Construct, id: string, taskDefinition: TaskDefinition, props: DataDogIntegrationProps) {
+  constructor(scope: cdk.Construct, id: string, taskDefinition: ecs.TaskDefinition, props: DatadogSidecarProps) {
     super(scope, id);
     this.taskDefinition = taskDefinition;
     this.props = props;
@@ -71,7 +70,7 @@ export class DatadogSidecar extends cdk.Construct implements cdk.ITaggable {
 
     let apmEnabled = (this.props.apmEnabled === undefined) ? true : this.props.apmEnabled;
     let jmxFetchEnabled = (this.props.jmxFetchEnabled === undefined) ? true : this.props.jmxFetchEnabled;
-    let datadogSite = (this.props.datadogSite === undefined) ? DataDogSite.us : this.props.datadogSite;
+    let datadogSite = (this.props.datadogSite === undefined) ? DataDogSite.US : this.props.datadogSite;
     let datadogTags = this.tags.renderTags().map((tag: any)  => {
       return '"' + tag.Key + ":" + tag.Value + '"'
     });

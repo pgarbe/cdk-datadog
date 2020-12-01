@@ -14,12 +14,12 @@ test('Custom Resource created', () => {
     creds: {
       datadogApiKey: secret.toString(),
       datadogAppKey: secret.toString(),
-      datadogSite: DataDogSite.eu,
+      datadogSite: DataDogSite.EU,
     },
     name: 'name',
     query: 'query',
     message: 'message',
-    type: CdkDatadog.MonitorType.watchdog
+    type: CdkDatadog.MonitorType.WATCHDOG
   });
 
   // THEN

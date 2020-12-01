@@ -1,12 +1,12 @@
-import * as cdk from '@aws-cdk/core';
+// import * as cdk from '@aws-cdk/core';
 
-export interface DataDogAccountIntegrationProps {
-}
+// export interface DataDogAccountIntegrationProps {
+// }
 
-export class DataDogAccountIntegration extends cdk.Construct {
+// export class DataDogAccountIntegration extends cdk.Construct {
 
-  constructor(scope: cdk.Construct, id: string) {
-    super(scope, id);
+//   constructor(scope: cdk.Construct, id: string) {
+//     super(scope, id);
   
   //   const supportedResource = [
   //     { 
@@ -26,7 +26,7 @@ export class DataDogAccountIntegration extends cdk.Construct {
   //       'SchemaHandlerPackage': 's3://datadog-cloudformation-resources/datadog-iam-user/datadog-iam-user-1.0.1.zip'
   //     },
   //   ];
-  }
+  // }
 
     // TODO: 
     // aws cloudformation register-type \
@@ -49,7 +49,7 @@ export class DataDogAccountIntegration extends cdk.Construct {
     // --type RESOURCE \
     // --version-id <VERSION_ID> \
     // --type-name "<DATADOG_RESOURCE_NAME>"
-}
+// }
 
 
 // aws cloudformation deregister-type \

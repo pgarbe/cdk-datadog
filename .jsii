@@ -6,15 +6,16 @@
     ]
   },
   "dependencies": {
-    "@aws-cdk/aws-cloudformation": "^1.21.1",
-    "@aws-cdk/aws-ecs": "^1.21.1",
-    "@aws-cdk/aws-lambda": "^1.21.1",
-    "@aws-cdk/aws-sns": "^1.21.1",
-    "@aws-cdk/aws-sns-subscriptions": "^1.21.1",
-    "@aws-cdk/aws-sqs": "^1.21.1",
-    "@aws-cdk/aws-ssm": "^1.21.1",
-    "@aws-cdk/core": "^1.21.1",
-    "@aws-cdk/custom-resources": "^1.21.1"
+    "@aws-cdk/aws-cloudformation": "^1.44.0",
+    "@aws-cdk/aws-ecs": "^1.44.0",
+    "@aws-cdk/aws-lambda": "^1.44.0",
+    "@aws-cdk/aws-sns": "^1.44.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.44.0",
+    "@aws-cdk/aws-sqs": "^1.44.0",
+    "@aws-cdk/aws-ssm": "^1.44.0",
+    "@aws-cdk/cdk": "^0.36.1",
+    "@aws-cdk/core": "^1.44.0",
+    "@aws-cdk/custom-resources": "^1.44.0"
   },
   "dependencyClosure": {
     "@aws-cdk/assets": {
@@ -264,6 +265,31 @@
         "python": {
           "distName": "aws-cdk.aws-cloudwatch",
           "module": "aws_cdk.aws_cloudwatch"
+        }
+      }
+    },
+    "@aws-cdk/aws-cognito": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.AWS.Cognito",
+          "packageId": "Amazon.CDK.AWS.Cognito",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "cognito",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.services.cognito"
+        },
+        "js": {
+          "npm": "@aws-cdk/aws-cognito"
+        },
+        "python": {
+          "distName": "aws-cdk.aws-cognito",
+          "module": "aws_cdk.aws_cognito"
         }
       }
     },
@@ -817,53 +843,71 @@
         }
       }
     },
-    "@aws-cdk/aws-stepfunctions": {
+    "@aws-cdk/cdk": {
       "targets": {
-        "dotnet": {
-          "assemblyOriginatorKeyFile": "../../key.snk",
-          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
-          "namespace": "Amazon.CDK.AWS.StepFunctions",
-          "packageId": "Amazon.CDK.AWS.StepFunctions",
-          "signAssembly": true
-        },
         "java": {
           "maven": {
-            "artifactId": "stepfunctions",
+            "artifactId": "cdk",
             "groupId": "software.amazon.awscdk"
           },
-          "package": "software.amazon.awscdk.services.stepfunctions"
+          "package": "software.amazon.awscdk"
         },
         "js": {
-          "npm": "@aws-cdk/aws-stepfunctions"
+          "npm": "@aws-cdk/cdk"
         },
         "python": {
-          "distName": "aws-cdk.aws-stepfunctions",
-          "module": "aws_cdk.aws_stepfunctions"
+          "distName": "aws-cdk.cdk",
+          "module": "aws_cdk.cdk"
         }
       }
     },
-    "@aws-cdk/aws-stepfunctions-tasks": {
+    "@aws-cdk/cdk-assets-schema": {
       "targets": {
         "dotnet": {
           "assemblyOriginatorKeyFile": "../../key.snk",
           "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
-          "namespace": "Amazon.CDK.AWS.StepFunctions.Tasks",
-          "packageId": "Amazon.CDK.AWS.StepFunctions.Tasks",
+          "namespace": "Amazon.CDK.CdkAssets.Schema",
+          "packageId": "Amazon.CDK.CdkAssets.Schema",
           "signAssembly": true
         },
         "java": {
           "maven": {
-            "artifactId": "stepfunctions-tasks",
+            "artifactId": "cdk-assets-schema",
             "groupId": "software.amazon.awscdk"
           },
-          "package": "software.amazon.awscdk.services.stepfunctions.tasks"
+          "package": "software.amazon.awscdk.cdkassets.schema"
         },
         "js": {
-          "npm": "@aws-cdk/aws-stepfunctions-tasks"
+          "npm": "@aws-cdk/cdk-assets-schema"
         },
         "python": {
-          "distName": "aws-cdk.aws-stepfunctions-tasks",
-          "module": "aws_cdk.aws_stepfunctions_tasks"
+          "distName": "aws-cdk.cdk-assets-schema",
+          "module": "aws_cdk.cdk_assets_schema"
+        }
+      }
+    },
+    "@aws-cdk/cloud-assembly-schema": {
+      "targets": {
+        "dotnet": {
+          "assemblyOriginatorKeyFile": "../../key.snk",
+          "iconUrl": "https://raw.githubusercontent.com/aws/aws-cdk/master/logo/default-256-dark.png",
+          "namespace": "Amazon.CDK.CloudAssembly.Schema",
+          "packageId": "Amazon.CDK.CloudAssembly.Schema",
+          "signAssembly": true
+        },
+        "java": {
+          "maven": {
+            "artifactId": "cdk-cloud-assembly-schema",
+            "groupId": "software.amazon.awscdk"
+          },
+          "package": "software.amazon.awscdk.cloudassembly.schema"
+        },
+        "js": {
+          "npm": "@aws-cdk/cloud-assembly-schema"
+        },
+        "python": {
+          "distName": "aws-cdk.cloud-assembly-schema",
+          "module": "aws_cdk.cloud_assembly_schema"
         }
       }
     },
@@ -966,11 +1010,33 @@
           "module": "aws_cdk.region_info"
         }
       }
+    },
+    "constructs": {
+      "targets": {
+        "dotnet": {
+          "namespace": "Constructs",
+          "packageId": "Constructs"
+        },
+        "java": {
+          "maven": {
+            "artifactId": "constructs",
+            "groupId": "software.constructs"
+          },
+          "package": "software.constructs"
+        },
+        "js": {
+          "npm": "constructs"
+        },
+        "python": {
+          "distName": "constructs",
+          "module": "constructs"
+        }
+      }
     }
   },
   "description": "cdk-datadog",
   "homepage": "https://github.com/pgarbe/cdk-datadog",
-  "jsiiVersion": "0.21.1 (build 9ff44cb)",
+  "jsiiVersion": "1.6.0 (build 248e75b)",
   "keywords": [
     "cdk",
     "aws-cdk",
@@ -982,7 +1048,7 @@
   "license": "Apache-2.0",
   "name": "cdk-datadog",
   "readme": {
-    "markdown": "# CDK-DataDog\n\nAn CDK library to easily integrate your applications with DataDog.\n\n> Disclaimer: It's not an offical DataDog Construct Library. In lack of an official one from DataDog, this library tries to fill the gap.\n\nCurrently supported:\n* DataDog Agent as ECS Sidecar\n* DataDog Monitors as native CDK Constructs\n\n\n## How to use it\n\n#### DataDog Agent as SideCar\n\n```typescript\n  let existingTaskDefinition = ... // Taskdefinition with app container\n  let datadogApiKey = // Secret from ParameterStore or SecretsManager\n\n  new DatadogSidecar(stack, 'DatadogSidecar', existingTaskDefinition, {\n    datadogApiKey: datadogApiKey,\n  });\n\n```\n\n## Open Issues\n- [ ] Deployment pipeline (GitHub actions?)\n- [ ] feat: enable CloudFormation 3rd party resources\n- [ ] feat: account integration (+ role)\n- [ ] Real integration test or at least simple example\n- [ ] feat: datadog monitors\n- [ ] feat: datadog synthetic tests\n- [ ] feat: datadog dashboards\n- [ ] feat: datadog log forwarder (aspect?)\n- [ ] feat: create monitors for all relevant resources (like cdk-watchful)\n- [ ] feat: support additional languages (python, dotnet, ...)\n\nhttps://github.com/aws/aws-cdk/blob/master/packages/@aws-cdk/custom-resources/README.md\n"
+    "markdown": "# CDK-DataDog\n\nAn CDK library to easily integrate your applications with DataDog.\n\n![](https://github.com/pgarbe/cdk-datadog/workflows/Build/badge.svg)\n\n> Disclaimer: This is not an offical DataDog Construct Library.\n\nCurrently supported:\n* DataDog Agent as ECS Sidecar\n* DataDog Monitors as native CDK Constructs\n\n\n## How to use it\n\n#### DataDog Agent as SideCar\n\n```typescript\n  let existingTaskDefinition = ... // Taskdefinition with app container\n  let datadogApiKey = // Secret from ParameterStore or SecretsManager\n\n  DatadogSidecar.addToTaskDefinition(\n    taskDefinition,\n    {\n      datadogApiKey: secret\n    }\n  );\n\n```\n\n## Open Issues\n- [ ] feat: datadog monitors\n- [ ] feat: enable CloudFormation 3rd party resources\n- [ ] feat: account integration (+ role)\n- [ ] Real integration test or at least simple example\n- [ ] feat: datadog synthetic tests\n- [ ] feat: datadog dashboards\n- [ ] feat: datadog log forwarder (aspect?)\n- [ ] feat: create monitors for all relevant resources (like cdk-watchful)\n- [ ] feat: support additional languages (python, dotnet, ...)\n- [ ] feat: forward (selected) events from EventBridge (e.g. ECS events)\n\nhttps://github.com/aws/aws-cdk/blob/master/packages/@aws-cdk/custom-resources/README.md\n"
   },
   "repository": {
     "type": "git",
@@ -998,7 +1064,374 @@
       "module": "cdk_datadog"
     }
   },
-  "types": {},
+  "types": {
+    "cdk-datadog.DataDogCredentials": {
+      "assembly": "cdk-datadog",
+      "datatype": true,
+      "fqn": "cdk-datadog.DataDogCredentials",
+      "kind": "interface",
+      "locationInModule": {
+        "filename": "lib/DataDog.ts",
+        "line": 6
+      },
+      "name": "DataDogCredentials",
+      "properties": [
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/DataDog.ts",
+            "line": 7
+          },
+          "name": "datadogApiKey",
+          "optional": true,
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/DataDog.ts",
+            "line": 8
+          },
+          "name": "datadogAppKey",
+          "optional": true,
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/DataDog.ts",
+            "line": 9
+          },
+          "name": "datadogSite",
+          "optional": true,
+          "type": {
+            "fqn": "cdk-datadog.DataDogSite"
+          }
+        }
+      ]
+    },
+    "cdk-datadog.DataDogMonitorProps": {
+      "assembly": "cdk-datadog",
+      "datatype": true,
+      "fqn": "cdk-datadog.DataDogMonitorProps",
+      "kind": "interface",
+      "locationInModule": {
+        "filename": "lib/datadog-monitor.ts",
+        "line": 22
+      },
+      "name": "DataDogMonitorProps",
+      "properties": [
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-monitor.ts",
+            "line": 23
+          },
+          "name": "creds",
+          "type": {
+            "fqn": "cdk-datadog.DataDogCredentials"
+          }
+        },
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-monitor.ts",
+            "line": 27
+          },
+          "name": "message",
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-monitor.ts",
+            "line": 26
+          },
+          "name": "name",
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-monitor.ts",
+            "line": 25
+          },
+          "name": "query",
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "abstract": true,
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-monitor.ts",
+            "line": 24
+          },
+          "name": "type",
+          "type": {
+            "fqn": "cdk-datadog.MonitorType"
+          }
+        }
+      ]
+    },
+    "cdk-datadog.DataDogSite": {
+      "assembly": "cdk-datadog",
+      "fqn": "cdk-datadog.DataDogSite",
+      "kind": "enum",
+      "locationInModule": {
+        "filename": "lib/DataDog.ts",
+        "line": 1
+      },
+      "members": [
+        {
+          "name": "EU"
+        },
+        {
+          "name": "US"
+        }
+      ],
+      "name": "DataDogSite"
+    },
+    "cdk-datadog.DatadogSidecar": {
+      "assembly": "cdk-datadog",
+      "base": "@aws-cdk/core.Construct",
+      "fqn": "cdk-datadog.DatadogSidecar",
+      "initializer": {
+        "parameters": [
+          {
+            "name": "scope",
+            "type": {
+              "fqn": "@aws-cdk/core.Construct"
+            }
+          },
+          {
+            "name": "id",
+            "type": {
+              "primitive": "string"
+            }
+          },
+          {
+            "name": "taskDefinition",
+            "type": {
+              "fqn": "@aws-cdk/aws-ecs.TaskDefinition"
+            }
+          },
+          {
+            "name": "props",
+            "type": {
+              "fqn": "cdk-datadog.DatadogSidecarProps"
+            }
+          }
+        ]
+      },
+      "kind": "class",
+      "locationInModule": {
+        "filename": "lib/datadog-sidecar.ts",
+        "line": 43
+      },
+      "methods": [
+        {
+          "docs": {
+            "summary": "Creates a DataDog sidecar to an existing task definition."
+          },
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 48
+          },
+          "name": "addToTaskDefinition",
+          "parameters": [
+            {
+              "name": "taskDefinition",
+              "type": {
+                "fqn": "@aws-cdk/aws-ecs.TaskDefinition"
+              }
+            },
+            {
+              "name": "props",
+              "type": {
+                "fqn": "cdk-datadog.DatadogSidecarProps"
+              }
+            }
+          ],
+          "returns": {
+            "type": {
+              "fqn": "@aws-cdk/core.Construct"
+            }
+          },
+          "static": true
+        },
+        {
+          "docs": {
+            "remarks": "So this is a safe place to render all needed resources with all .",
+            "summary": "The resources of this Constructs are rendered here, as environment variables of ContainerDefinition can only be set in constructor, but tags can beapplied later."
+          },
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 69
+          },
+          "name": "prepare",
+          "overrides": "@aws-cdk/core.Construct"
+        }
+      ],
+      "name": "DatadogSidecar",
+      "properties": [
+        {
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 52
+          },
+          "name": "tags",
+          "type": {
+            "fqn": "@aws-cdk/core.TagManager"
+          }
+        }
+      ]
+    },
+    "cdk-datadog.DatadogSidecarProps": {
+      "assembly": "cdk-datadog",
+      "datatype": true,
+      "fqn": "cdk-datadog.DatadogSidecarProps",
+      "kind": "interface",
+      "locationInModule": {
+        "filename": "lib/datadog-sidecar.ts",
+        "line": 16
+      },
+      "name": "DatadogSidecarProps",
+      "properties": [
+        {
+          "abstract": true,
+          "docs": {
+            "summary": "The secret that stores the Datadog API key."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 20
+          },
+          "name": "datadogApiKey",
+          "type": {
+            "fqn": "@aws-cdk/aws-ecs.Secret"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "remarks": "Default: true",
+            "summary": "Enable trace collection with the Trace Agent."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 30
+          },
+          "name": "apmEnabled",
+          "optional": true,
+          "type": {
+            "primitive": "boolean"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "remarks": "Default: DataDogSite.us",
+            "summary": "Destination site for your metrics, traces, and logs."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 25
+          },
+          "name": "datadogSite",
+          "optional": true,
+          "type": {
+            "fqn": "cdk-datadog.DataDogSite"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "remarks": "Default: true",
+            "summary": "Enable collection of JMX metrics by Java Tracing Agent."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 35
+          },
+          "name": "jmxFetchEnabled",
+          "optional": true,
+          "type": {
+            "primitive": "boolean"
+          }
+        },
+        {
+          "abstract": true,
+          "docs": {
+            "summary": "The logging configuration for Datadog container."
+          },
+          "immutable": true,
+          "locationInModule": {
+            "filename": "lib/datadog-sidecar.ts",
+            "line": 40
+          },
+          "name": "logging",
+          "optional": true,
+          "type": {
+            "fqn": "@aws-cdk/aws-ecs.LogDriver"
+          }
+        }
+      ]
+    },
+    "cdk-datadog.MonitorType": {
+      "assembly": "cdk-datadog",
+      "fqn": "cdk-datadog.MonitorType",
+      "kind": "enum",
+      "locationInModule": {
+        "filename": "lib/datadog-monitor.ts",
+        "line": 4
+      },
+      "members": [
+        {
+          "name": "ANOMALY"
+        },
+        {
+          "name": "COMPOSITE"
+        },
+        {
+          "name": "CUSTOM"
+        },
+        {
+          "name": "EVENT"
+        },
+        {
+          "name": "LIVE"
+        },
+        {
+          "name": "LOGS"
+        },
+        {
+          "name": "METRIC"
+        }
+      ],
+      "name": "MonitorType"
+    }
+  },
   "version": "0.0.1",
-  "fingerprint": "LwXhKusAVF5oPacwglDlMG9rAcXFBYgBo0KQt3SVT2Q="
+  "fingerprint": "xuXLdGW3rVawSIEaepNCbh2vTMrN7kvLJgT8N9Ywnq0="
 }
