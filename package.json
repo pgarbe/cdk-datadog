@@ -43,7 +43,7 @@
     "datadog"
   ],
   "devDependencies": {
-    "@aws-cdk/assert": "1.44.0",
+    "@aws-cdk/assert": "1.83.0",
     "@aws-cdk/cloudformation-diff": "1.44.0",
     "@types/jest": "25.2.3",
     "@types/node": "14.0.10",
