@@ -8,8 +8,6 @@ const project = new AwsCdkConstructLibrary({
   repository: 'https://github.com/pgarbe/cdk-datadog.git',
   keywords: ['cdk', 'datadog', 'ecr', 'lambda'],
 
-  releaseEveryCommit: false,
-
   catalog: {
     twitter: 'pgarbe',
   },
