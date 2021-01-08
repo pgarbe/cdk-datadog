@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/pgarbe/cdk-datadog/compare/v0.0.1...v0.0.2) (2021-01-08)
+
+
+### Bug Fixes
+
+* use region in layer arns ([4128149](https://github.com/pgarbe/cdk-datadog/commit/41281495d60ede3a1f7d3360d59b03c6bd2d21f1))
+
 ### 0.0.1 (2021-01-08)
 
 
