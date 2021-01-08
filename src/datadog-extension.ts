@@ -1,4 +1,5 @@
 import * as lambda from '@aws-cdk/aws-lambda';
+import * as ssm from '@aws-cdk/aws-ssm';
 import * as cdk from '@aws-cdk/core';
 import * as dd from '.';
 
@@ -7,44 +8,41 @@ export interface DataDogLambdaAspectProps {
   /**
    * Destination site for your metrics, traces, and logs.
    *
-   * @default: DataDogSite.EU
+   * @default: DataDogSite.US
    */
   readonly datadogSite?: dd.DataDogSite | undefined;
 
-  // DD_FLUSH_TO_LOG
-  // Set to true (recommended) to send custom metrics asynchronously (with no added latency to your Lambda function executions) through CloudWatch Logs
-  // with the help of Datadog Forwarder. Defaults to false. If set to false, you also need to set DD_API_KEY and DD_SITE.
+  /**
+   * Defines the DataDog API Key.
+   *
+   * A string will be mapped to DD_API_KEY env variable in plain-text (NOT recommended)
+   * An SSM StringParamter (optional secure) is mapped to either DD_API_KEY_SECRET_ARN or DD_API_KEY_SSM_NAME.
+   */
+  readonly dataDogApiKey: string | ssm.IStringParameter;
 
-  // DD_API_KEY
+  /**
+   * Inject Datadog trace id into logs for correlation.
+   *
+   * @default: true
+   */
+  readonly logsInjection?: boolean;
 
-  // If DD_FLUSH_TO_LOG is set to false (not recommended), the Datadog API Key must be defined by setting one of the following environment variables:
+  /**
+   * Generate enhanced Datadog Lambda integration metrics, such as, aws.lambda.enhanced.invocations and aws.lambda.enhanced.errors.
+   *
+   * @default: true
+   */
+  readonly enhancedMetrics?: boolean;
 
-  //     DD_API_KEY - the Datadog API Key in plain-text, NOT recommended
-  //     DD_KMS_API_KEY - the KMS-encrypted API Key, requires the kms:Decrypt permission
-  //     DD_API_KEY_SECRET_ARN - the Secret ARN to fetch API Key from the Secrets Manager, requires the secretsmanager:GetSecretValue permission (and kms:Decrypt if using a customer managed CMK)
-  //     DD_API_KEY_SSM_NAME - the Parameter Name to fetch API Key from the Systems Manager Parameter Store, requires the ssm:GetParameter permission (and kms:Decrypt if using a SecureString with a customer managed CMK)
-
-  // DD_SITE
-
-  // If DD_FLUSH_TO_LOG is set to false (not recommended), and your data need to be sent to the Datadog EU site, you must set DD_SITE to datadoghq.eu. Defaults to datadoghq.com.
-  // DD_LOGS_INJECTION
-
-  // Inject Datadog trace id into logs for correlation. Defaults to true.
-  // DD_LOG_LEVEL
-
-  // Set to debug enable debug logs from the Datadog Lambda Library. Defaults to info.
-  // DD_ENHANCED_METRICS
-
-  // Generate enhanced Datadog Lambda integration metrics, such as, aws.lambda.enhanced.invocations and aws.lambda.enhanced.errors. Defaults to true.
   // DD_LAMBDA_HANDLER
-
   // Your original Lambda handler.
-  // DD_TRACE_ENABLED
 
-  // Initialize the Datadog tracer when set to true. Defaults to false.
-  // DD_MERGE_XRAY_TRACES
-
-  // Set to true to merge the X-Ray trace and the Datadog trace, when using both the X-Ray and Datadog tracing. Defaults to false.
+  /**
+   * Initialize the Datadog tracer when set to true.
+   *
+   * @default: false
+   */
+  readonly tracing?: boolean;
 
   /**
    * Version of DataDog extension layer for Node runtime.
@@ -60,59 +58,88 @@ export interface DataDogLambdaAspectProps {
   readonly pythonVersion?: string;
 }
 
+/**
+ * Adds DataDog layer to supported lambda functions.
+ */
 export class DataDogLambda implements cdk.IAspect {
 
   /**
-   * Watches the given scope and adds alarms for known resources.
+   * Adds DataDog layer to supported lambda functions.
    */
-  public static extendFuntions(scope: cdk.Construct, props?: DataDogLambdaAspectProps): void {
+  public static extendFuntions(scope: cdk.Construct, props: DataDogLambdaAspectProps): void {
     const aspect = new DataDogLambda(props);
     cdk.Aspects.of(scope).add(aspect);
   }
 
   private readonly nodeVersion: string;
   private readonly pythonVersion: string;
+  private readonly enhancedMetrics: boolean;
+  private readonly tracing: boolean;
+  private readonly logsInjection: boolean;
+  private readonly datadogSite: dd.DataDogSite;
+  private readonly dataDogApiKey: string | ssm.IStringParameter;
 
   /**
    * Adds DataDog extension to lambda functions.
    *
    * Only Python (2.7, 3.6, 3.7 and 3.8) and Node (10.x and 12.x) runtimes are supported.
    */
-  constructor(props?: DataDogLambdaAspectProps) {
+  constructor(props: DataDogLambdaAspectProps) {
     this.nodeVersion = props?.nodeVersion ?? '41';
     this.pythonVersion = props?.pythonVersion ?? '26';
+    this.tracing = props?.tracing ?? false;
+    this.enhancedMetrics = props?.enhancedMetrics ?? true;
+    this.logsInjection = props?.logsInjection ?? true;
+    this.datadogSite = props?.datadogSite ?? dd.DataDogSite.US;
+    this.dataDogApiKey = props.dataDogApiKey;
   }
 
   public visit(node: cdk.IConstruct): void {
     if (node instanceof lambda.Function) {
-      switch (node.runtime) {
-        case lambda.Runtime.PYTHON_2_7:
-          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).environment}:464622532012:layer:Datadog-Python27:${this.pythonVersion}`));
-          node.addEnvironment('DD_LOGS_ENABLED', 'true');
-          return;
-        case lambda.Runtime.PYTHON_3_6:
-          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).environment}:464622532012:layer:Datadog-Python36:${this.pythonVersion}`));
-          node.addEnvironment('DD_LOGS_ENABLED', 'true');
-          return;
-        case lambda.Runtime.PYTHON_3_7:
-          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).environment}:464622532012:layer:Datadog-Python37:${this.pythonVersion}`));
-          node.addEnvironment('DD_LOGS_ENABLED', 'true');
-          return;
-        case lambda.Runtime.PYTHON_3_8:
-          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).environment}:464622532012:layer:Datadog-Python38:${this.pythonVersion}`));
-          node.addEnvironment('DD_LOGS_ENABLED', 'true');
-          return;
-        case lambda.Runtime.NODEJS_10_X:
-          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).environment}:464622532012:layer:Datadog-Node10-x:${this.nodeVersion}`));
-          node.addEnvironment('DD_LOGS_ENABLED', 'true');
-          return;
-        case lambda.Runtime.NODEJS_12_X:
-          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).environment}:464622532012:layer:Datadog-Node12-x:${this.nodeVersion}`));
-          node.addEnvironment('DD_LOGS_ENABLED', 'true');
-          return;
-        default:
-          return;
+      const layer = this.getLambdaLayer(node);
+      if (layer) {
+        node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', layer));
+        node.addEnvironment('DD_FLUSH_TO_LOG', 'false');
+        node.addEnvironment('DD_LOGS_ENABLED', 'true');
+        node.addEnvironment('DD_TRACE_ENABLED', this.tracing.toString());
+        node.addEnvironment('DD_ENHANCED_METRICS', this.enhancedMetrics.toString());
+        node.addEnvironment('DD_LOGS_INJECTION', this.logsInjection.toString());
+        node.addEnvironment('DD_SITE', this.datadogSite);
+
+        if (typeof this.dataDogApiKey === 'string') {
+          node.addEnvironment('DD_API_KEY', this.dataDogApiKey);
+        } else {
+          // allow lambda function to read the value
+          this.dataDogApiKey.grantRead(node);
+
+          if (this.dataDogApiKey.parameterType === ssm.ParameterType.SECURE_STRING) {
+            node.addEnvironment('DD_API_KEY_SECRET_ARN', this.dataDogApiKey.parameterArn);
+          } else if (this.dataDogApiKey.parameterType === ssm.ParameterType.STRING) {
+            node.addEnvironment('DD_API_KEY_SSM_NAME', this.dataDogApiKey.parameterName);
+          } else {
+            throw Error('DataDogApiKey must be a String or SecureString parameter');
+          }
+        }
       }
+    }
+  }
+
+  private getLambdaLayer(func: lambda.Function): string | undefined {
+    switch (func.runtime) {
+      case lambda.Runtime.PYTHON_2_7:
+        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python27:${this.pythonVersion}`;
+      case lambda.Runtime.PYTHON_3_6:
+        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python36:${this.pythonVersion}`;
+      case lambda.Runtime.PYTHON_3_7:
+        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python37:${this.pythonVersion}`;
+      case lambda.Runtime.PYTHON_3_8:
+        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python38:${this.pythonVersion}`;
+      case lambda.Runtime.NODEJS_10_X:
+        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Node10-x:${this.nodeVersion}`;
+      case lambda.Runtime.NODEJS_12_X:
+        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Node12-x:${this.nodeVersion}`;
+      default:
+        return undefined;
     }
   }
 }
