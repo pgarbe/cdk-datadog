@@ -127,17 +127,17 @@ export class DataDogLambda implements cdk.IAspect {
   private getLambdaLayer(func: lambda.Function): string | undefined {
     switch (func.runtime) {
       case lambda.Runtime.PYTHON_2_7:
-        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python27:${this.pythonVersion}`;
+        return `arn:aws:lambda:${cdk.Stack.of(func).region}:464622532012:layer:Datadog-Python27:${this.pythonVersion}`;
       case lambda.Runtime.PYTHON_3_6:
-        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python36:${this.pythonVersion}`;
+        return `arn:aws:lambda:${cdk.Stack.of(func).region}:464622532012:layer:Datadog-Python36:${this.pythonVersion}`;
       case lambda.Runtime.PYTHON_3_7:
-        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python37:${this.pythonVersion}`;
+        return `arn:aws:lambda:${cdk.Stack.of(func).region}:464622532012:layer:Datadog-Python37:${this.pythonVersion}`;
       case lambda.Runtime.PYTHON_3_8:
-        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Python38:${this.pythonVersion}`;
+        return `arn:aws:lambda:${cdk.Stack.of(func).region}:464622532012:layer:Datadog-Python38:${this.pythonVersion}`;
       case lambda.Runtime.NODEJS_10_X:
-        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Node10-x:${this.nodeVersion}`;
+        return `arn:aws:lambda:${cdk.Stack.of(func).region}:464622532012:layer:Datadog-Node10-x:${this.nodeVersion}`;
       case lambda.Runtime.NODEJS_12_X:
-        return `arn:aws:lambda:${cdk.Stack.of(func).environment}:464622532012:layer:Datadog-Node12-x:${this.nodeVersion}`;
+        return `arn:aws:lambda:${cdk.Stack.of(func).region}:464622532012:layer:Datadog-Node12-x:${this.nodeVersion}`;
       default:
         return undefined;
     }

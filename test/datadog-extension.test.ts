@@ -26,7 +26,18 @@ test('Lambda extension sets layer and env variables', () => {
       },
     },
     Layers: [
-      'arn:aws:lambda:aws://unknown-account/unknown-region:464622532012:layer:Datadog-Node12-x:41',
+      {
+        'Fn::Join': [
+          '',
+          [
+            'arn:aws:lambda:',
+            {
+              Ref: 'AWS::Region',
+            },
+            ':464622532012:layer:Datadog-Node12-x:41',
+          ],
+        ],
+      },
     ],
   }));
 });
