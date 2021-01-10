@@ -45,7 +45,6 @@ new DataDogLambda(props: DataDogLambdaAspectProps)
 * **props** (<code>[DataDogLambdaAspectProps](#pgarbe-cdk-datadog-datadoglambdaaspectprops)</code>)  *No description*
   * **dataDogApiKey** (<code>string &#124; [IStringParameter](#aws-cdk-aws-ssm-istringparameter)</code>)  Defines the DataDog API Key. 
   * **datadogSite** (<code>[DataDogSite](#pgarbe-cdk-datadog-datadogsite)</code>)  Destination site for your metrics, traces, and logs. __*Default*__: : DataDogSite.US
-  * **enhancedMetrics** (<code>boolean</code>)  Generate enhanced Datadog Lambda integration metrics, such as, aws.lambda.enhanced.invocations and aws.lambda.enhanced.errors. __*Default*__: : true
   * **logsInjection** (<code>boolean</code>)  Inject Datadog trace id into logs for correlation. __*Default*__: : true
   * **nodeVersion** (<code>string</code>)  Version of DataDog extension layer for Node runtime. __*Default*__: : 41
   * **pythonVersion** (<code>string</code>)  Version of DataDog extension layer for Python runtime. __*Default*__: : 26
@@ -80,7 +79,6 @@ static extendFuntions(scope: Construct, props: DataDogLambdaAspectProps): void
 * **props** (<code>[DataDogLambdaAspectProps](#pgarbe-cdk-datadog-datadoglambdaaspectprops)</code>)  *No description*
   * **dataDogApiKey** (<code>string &#124; [IStringParameter](#aws-cdk-aws-ssm-istringparameter)</code>)  Defines the DataDog API Key. 
   * **datadogSite** (<code>[DataDogSite](#pgarbe-cdk-datadog-datadogsite)</code>)  Destination site for your metrics, traces, and logs. __*Default*__: : DataDogSite.US
-  * **enhancedMetrics** (<code>boolean</code>)  Generate enhanced Datadog Lambda integration metrics, such as, aws.lambda.enhanced.invocations and aws.lambda.enhanced.errors. __*Default*__: : true
   * **logsInjection** (<code>boolean</code>)  Inject Datadog trace id into logs for correlation. __*Default*__: : true
   * **nodeVersion** (<code>string</code>)  Version of DataDog extension layer for Node runtime. __*Default*__: : 41
   * **pythonVersion** (<code>string</code>)  Version of DataDog extension layer for Python runtime. __*Default*__: : 26
@@ -190,7 +188,6 @@ Name | Type | Description
 -----|------|-------------
 **dataDogApiKey** | <code>string &#124; [IStringParameter](#aws-cdk-aws-ssm-istringparameter)</code> | Defines the DataDog API Key.
 **datadogSite**? | <code>[DataDogSite](#pgarbe-cdk-datadog-datadogsite)</code> | Destination site for your metrics, traces, and logs.<br/>__*Default*__: : DataDogSite.US
-**enhancedMetrics**? | <code>boolean</code> | Generate enhanced Datadog Lambda integration metrics, such as, aws.lambda.enhanced.invocations and aws.lambda.enhanced.errors.<br/>__*Default*__: : true
 **logsInjection**? | <code>boolean</code> | Inject Datadog trace id into logs for correlation.<br/>__*Default*__: : true
 **nodeVersion**? | <code>string</code> | Version of DataDog extension layer for Node runtime.<br/>__*Default*__: : 41
 **pythonVersion**? | <code>string</code> | Version of DataDog extension layer for Python runtime.<br/>__*Default*__: : 26

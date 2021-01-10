@@ -32,7 +32,7 @@ export interface DataDogLambdaAspectProps {
    *
    * @default: true
    */
-  readonly enhancedMetrics?: boolean;
+  // readonly enhancedMetrics?: boolean;
 
   // DD_LAMBDA_HANDLER
   // Your original Lambda handler.
@@ -73,7 +73,7 @@ export class DataDogLambda implements cdk.IAspect {
 
   private readonly nodeVersion: string;
   private readonly pythonVersion: string;
-  private readonly enhancedMetrics: boolean;
+  // private readonly enhancedMetrics: boolean;
   private readonly tracing: boolean;
   private readonly logsInjection: boolean;
   private readonly datadogSite: dd.DataDogSite;
@@ -88,7 +88,7 @@ export class DataDogLambda implements cdk.IAspect {
     this.nodeVersion = props?.nodeVersion ?? '41';
     this.pythonVersion = props?.pythonVersion ?? '26';
     this.tracing = props?.tracing ?? false;
-    this.enhancedMetrics = props?.enhancedMetrics ?? true;
+    // this.enhancedMetrics = props?.enhancedMetrics ?? true;
     this.logsInjection = props?.logsInjection ?? true;
     this.datadogSite = props?.datadogSite ?? dd.DataDogSite.US;
     this.dataDogApiKey = props.dataDogApiKey;
@@ -96,16 +96,27 @@ export class DataDogLambda implements cdk.IAspect {
 
   public visit(node: cdk.IConstruct): void {
     if (node instanceof lambda.Function) {
+
       const layer = this.getLambdaLayer(node);
       if (layer) {
-        node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', layer));
-        node.addEnvironment('DD_FLUSH_TO_LOG', 'false');
-        node.addEnvironment('DD_LOGS_ENABLED', 'true');
-        node.addEnvironment('DD_TRACE_ENABLED', this.tracing.toString());
-        node.addEnvironment('DD_ENHANCED_METRICS', this.enhancedMetrics.toString());
-        node.addEnvironment('DD_LOGS_INJECTION', this.logsInjection.toString());
-        node.addEnvironment('DD_SITE', this.datadogSite);
+        const logsEnabled = true;
 
+        if (logsEnabled) {
+          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Extension', `arn:aws:lambda:${cdk.Stack.of(node).region}:464622532012:layer:Datadog-Extension:5`));
+          node.addEnvironment('DD_LOGS_ENABLED', 'true');
+          node.addEnvironment('DD_FLUSH_TO_LOG', 'false');
+
+          // TODO: Remove permissions for CloudWatch Logs
+        }
+
+        if (this.tracing) {
+          node.addLayers(lambda.LayerVersion.fromLayerVersionArn(node, 'DD-Library', layer));
+          node.addEnvironment('DD_TRACE_ENABLED', this.tracing.toString());
+          // node.addEnvironment('DD_ENHANCED_METRICS', this.enhancedMetrics.toString()); // Part of Logs...
+          node.addEnvironment('DD_LOGS_INJECTION', this.logsInjection.toString());
+        }
+
+        node.addEnvironment('DD_SITE', this.datadogSite);
         if (typeof this.dataDogApiKey === 'string') {
           node.addEnvironment('DD_API_KEY', this.dataDogApiKey);
         } else {

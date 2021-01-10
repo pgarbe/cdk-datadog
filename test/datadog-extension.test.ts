@@ -21,8 +21,10 @@ test('Lambda extension sets layer and env variables', () => {
   expectCDK(stack).to(haveResourceLike('AWS::Lambda::Function', {
     Environment: {
       Variables: {
-        DD_API_KEY: 'myapikey',
         DD_LOGS_ENABLED: 'true',
+        DD_FLUSH_TO_LOG: 'false',
+        DD_SITE: 'datadoghq.com',
+        DD_API_KEY: 'myapikey',
       },
     },
     Layers: [
@@ -34,7 +36,7 @@ test('Lambda extension sets layer and env variables', () => {
             {
               Ref: 'AWS::Region',
             },
-            ':464622532012:layer:Datadog-Node12-x:41',
+            ':464622532012:layer:Datadog-Extension:5',
           ],
         ],
       },
