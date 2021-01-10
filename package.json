@@ -48,7 +48,7 @@
     "jsii-release": "^0.2.10",
     "json-schema": "^0.3.0",
     "pre-commit": "^1.2.2",
-    "projen": "^0.14.3",
+    "projen": "^0.14.5",
     "standard-version": "^9.0.0",
     "ts-jest": "26.4.4",
     "typescript": "^3.9.5"
