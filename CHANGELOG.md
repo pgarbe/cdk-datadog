@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/pgarbe/cdk-datadog/compare/v0.0.2...v0.0.3) (2021-01-10)
+
+
+### Features
+
+* separate logs and tracing ([3373d6c](https://github.com/pgarbe/cdk-datadog/commit/3373d6c0230ced31d8fdda780729b3fe9dc104d3))
+
 ### [0.0.2](https://github.com/pgarbe/cdk-datadog/compare/v0.0.1...v0.0.2) (2021-01-08)
 
 
