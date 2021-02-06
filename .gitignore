@@ -48,5 +48,6 @@ yarn-error.log*
 !/package.json
 !/src
 !/test
+!/tsconfig.eslint.json
 !/tsconfig.jest.json
 !version.json

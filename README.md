@@ -26,3 +26,28 @@ Currently supported:
   );
 
 ```
+
+## How it works
+
+Primitives:
+
+- Metric
+- Log
+- Trace
+
+Manipulate with tags:
+https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+
+- service
+- env
+- version
+
+### Fargate
+
+- Logs: fluentbit
+- Metrics: dd-agent
+- Traces: dd-agent
+
+### Lambda
+
+- Wait for March

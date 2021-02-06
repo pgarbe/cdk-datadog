@@ -7,6 +7,7 @@ const project = new AwsCdkConstructLibrary({
   authorUrl: 'https://garbe.io',
   repository: 'https://github.com/pgarbe/cdk-datadog.git',
   keywords: ['cdk', 'datadog', 'ecr', 'lambda'],
+  defaultReleaseBranch: 'main',
 
   catalog: {
     twitter: 'pgarbe',
@@ -15,7 +16,7 @@ const project = new AwsCdkConstructLibrary({
   // creates PRs for projen upgrades
   projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
 
-  cdkVersion: '1.83.0',
+  cdkVersion: '1.88.0',
   cdkDependencies: [
     '@aws-cdk/aws-cloudformation',
     '@aws-cdk/aws-codebuild',
