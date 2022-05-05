@@ -1,7 +1,7 @@
-import { expect as expectCDK, haveResourceLike } from '@aws-cdk/assert';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as ssm from '@aws-cdk/aws-ssm';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import * as dd from '../src/';
 
 test('Lambda extension sets layer and env variables', () => {
@@ -18,7 +18,8 @@ test('Lambda extension sets layer and env variables', () => {
   dd.DataDogLambda.extendFuntions(stack, { dataDogApiKey: 'myapikey' });
 
   // THEN
-  expectCDK(stack).to(haveResourceLike('AWS::Lambda::Function', {
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Environment: {
       Variables: {
         DD_LOGS_ENABLED: 'true',
@@ -41,7 +42,7 @@ test('Lambda extension sets layer and env variables', () => {
         ],
       },
     ],
-  }));
+  });
 });
 
 test('ApiKey as string parameter requires permissions', () => {
@@ -59,13 +60,14 @@ test('ApiKey as string parameter requires permissions', () => {
   dd.DataDogLambda.extendFuntions(stack, { dataDogApiKey: param });
 
   // THEN
-  expectCDK(stack).to(haveResourceLike('AWS::Lambda::Function', {
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Environment: {
       Variables: {
         DD_API_KEY_SSM_NAME: '/config/datadog/apikey',
       },
     },
-  }));
+  });
 });
 
 test('ApiKey as secure string parameter requires permissions', () => {
@@ -83,7 +85,8 @@ test('ApiKey as secure string parameter requires permissions', () => {
   dd.DataDogLambda.extendFuntions(stack, { dataDogApiKey: param });
 
   // THEN
-  expectCDK(stack).to(haveResourceLike('AWS::Lambda::Function', {
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties('AWS::Lambda::Function', {
     Environment: {
       Variables: {
         DD_API_KEY_SECRET_ARN: {
@@ -108,5 +111,5 @@ test('ApiKey as secure string parameter requires permissions', () => {
         },
       },
     },
-  }));
+  });
 });

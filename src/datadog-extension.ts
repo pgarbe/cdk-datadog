@@ -1,6 +1,7 @@
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as ssm from '@aws-cdk/aws-ssm';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
+import { Construct, IConstruct } from 'constructs';
 import * as dd from '.';
 
 export interface DataDogLambdaAspectProps {
@@ -66,7 +67,7 @@ export class DataDogLambda implements cdk.IAspect {
   /**
    * Adds DataDog layer to supported lambda functions.
    */
-  public static extendFuntions(scope: cdk.Construct, props: DataDogLambdaAspectProps): void {
+  public static extendFuntions(scope: Construct, props: DataDogLambdaAspectProps): void {
     const aspect = new DataDogLambda(props);
     cdk.Aspects.of(scope).add(aspect);
   }
@@ -94,7 +95,7 @@ export class DataDogLambda implements cdk.IAspect {
     this.dataDogApiKey = props.dataDogApiKey;
   }
 
-  public visit(node: cdk.IConstruct): void {
+  public visit(node: IConstruct): void {
     if (node instanceof lambda.Function) {
 
       const layer = this.getLambdaLayer(node);
